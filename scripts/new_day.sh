@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
 DAY=$1
+LANG=$2
 PAD=$(printf "%02d" $DAY)
 
-mkdir -p inputs
-mkdir -p solutions
+INPUT="inputs/day$PAD.txt"
 
-cp solutions/template.py solutions/day$PAD.py
+mkdir -p inputs
 
 ./scripts/fetch_input.sh $DAY
 
-echo "Created files for Day $DAY"
+if [ "$LANG" = "python" ]; then
+    cp solutions/python/template.py solutions/python/day$PAD.py
+    echo "Created Python solution for day $DAY"
+fi
+
+if [ "$LANG" = "rust" ]; then
+    cargo new solutions/rust/day$PAD --vcs none
+    echo "Created Rust solution for day $DAY"
+fi
