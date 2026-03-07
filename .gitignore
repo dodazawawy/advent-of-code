@@ -1,0 +1,5 @@
+inputs/
+target/
+__pycache/
+*.pyc
+.env
