@@ -36,15 +36,22 @@ def part1(data):
 
     return count
 
-def part2(data): 
+def part2(data):
     reports = parse(data)
-    count = 0 
+    count = 0
 
-    for i in range(len(report)):
-        new_report = report[:i] + report[i+1:]
-        if is_safe(new_report):
+    for report in reports:
+        # if already safe
+        if is_safe(report):
             count += 1
-            break
+            continue
+
+        # try removing one level
+        for i in range(len(report)):
+            new_report = report[:i] + report[i+1:]
+            if is_safe(new_report):
+                count += 1
+                break
 
     return count
 
