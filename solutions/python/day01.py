@@ -1,40 +1,50 @@
 import sys
-from collections import Counter
-
+  
 def parse(data):
     left = []
     right = []
 
-    for line in data: 
-        a, b = map(int, line.split())
-        left.append(a)
-        right.append(b)
-
+    for line in data:
+        parts = line.split()
+        left.append(parts[0])
+        right.append(parts[1])
     return left, right
 
-def part1(data):
 
+def part1(data):
     left, right = parse(data)
+    d = 0
+    left = [int(x) for x in left]
+    right = [int(x) for x in right]
 
     left.sort()
     right.sort()
 
-    total = 0
-    for a, b in zip(left, right):
-        total += abs(a - b)
+    for i in range(len(left)):
+        d += abs((left[i]) - (right[i]))
+    return d
+        
+    
 
-    return total
 
 def part2(data):
     left, right = parse(data)
+    left = [int(x) for x in left]
+    right = [int(x) for x in right]
+    
+    comp = 0
+    rep = []
+    for i in range(len(left)):
+        r = 0
+        for x in range(len(right)):
+            if left[i] == right[x]:
+                r += 1
+        rep.append(r)
 
-    counts = Counter(right)
+    for i in range(len(left)):
+        comp += left[i] * rep[i]
+    return comp
 
-    score = 0
-    for x in left:
-        score += x * counts[x]
-
-    return score
 
 if __name__ == "__main__":
     with open(sys.argv[1]) as f:
