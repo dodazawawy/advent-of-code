@@ -6,6 +6,7 @@ Environment:
 - NixOS
 - Nix flakes dev shell
 - Python
+- Java
 
 Workflow:
 nix develop
